@@ -86,7 +86,7 @@ function checkGuess () {
             // now, letter is definitely in word
             // if letter index and right guess index are the same
             // letter is in the right position 
-            if (currentGuess[i] === rightGuess[i]) {
+            if (currentGuess[i] == rightGuess[i]) {
                 // shade green 
                 letterColor = 'green'
             } else {
