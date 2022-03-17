@@ -1,4 +1,4 @@
-import { WORDS } from "./words.js";
+import { WORDS } from "./palavras_5.js";
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
@@ -7,6 +7,7 @@ let nextLetter = 0;
 let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
 
 console.log(rightGuessString)
+console.log(WORDS);
 
 function initBoard() {
     let board = document.getElementById("game-board");
@@ -62,12 +63,12 @@ function checkGuess () {
     }
 
     if (guessString.length != 5) {
-        toastr.error("Not enough letters!")
+        toastr.error("Não tem letras suficientes!")
         return
     }
 
     if (!WORDS.includes(guessString)) {
-        toastr.error("Word not in list!")
+        toastr.error("Palavra não existe na lista!")
         return
     }
 
@@ -107,7 +108,7 @@ function checkGuess () {
     }
 
     if (guessString === rightGuessString) {
-        toastr.success("You guessed right! Game over!")
+        toastr.success("Acertou mizerávi!")
         guessesRemaining = 0
         return
     } else {
@@ -116,8 +117,8 @@ function checkGuess () {
         nextLetter = 0;
 
         if (guessesRemaining === 0) {
-            toastr.error("You've run out of guesses! Game over!")
-            toastr.info(`The right word was: "${rightGuessString}"`)
+            toastr.error("Misericórdia! Game over!")
+            toastr.info(`A palavra era: "${rightGuessString}"`)
         }
     }
 }
