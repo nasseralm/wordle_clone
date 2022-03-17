@@ -30,11 +30,11 @@ function shadeKeyBoard(letter, color) {
     for (const elem of document.getElementsByClassName("keyboard-button")) {
         if (elem.textContent === letter) {
             let oldColor = elem.style.backgroundColor
-            if (oldColor === 'green') {
+            if (oldColor === '#76c893') {
                 return
             } 
 
-            if (oldColor === 'yellow' && color !== 'green') {
+            if (oldColor === '#ffcb77' && color !== '#76c893') {
                 return
             }
 
@@ -81,17 +81,17 @@ function checkGuess () {
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         // is letter in the correct guess
         if (letterPosition === -1) {
-            letterColor = 'grey'
+            letterColor = '#011627'
         } else {
             // now, letter is definitely in word
             // if letter index and right guess index are the same
             // letter is in the right position 
             if (currentGuess[i] == rightGuess[i]) {
                 // shade green 
-                letterColor = 'green'
+                letterColor = '#76c893'
             } else {
                 // shade box yellow
-                letterColor = 'yellow'
+                letterColor = '#ffcb77'
             }
 
             rightGuess[letterPosition] = "#"
@@ -110,6 +110,10 @@ function checkGuess () {
     if (guessString === rightGuessString) {
         toastr.success("Acertou mizerávi!")
         guessesRemaining = 0
+        toastr.info(`Carregando novo jogo`)
+        setInterval(() => {
+            document.location.reload(true);
+        }, 5000);
         return
     } else {
         guessesRemaining -= 1;
@@ -119,6 +123,10 @@ function checkGuess () {
         if (guessesRemaining === 0) {
             toastr.error("Misericórdia! Game over!")
             toastr.info(`A palavra era: "${rightGuessString}"`)
+            toastr.info(`Carregando novo jogo`)
+            setInterval(() => {
+                document.location.reload(true);
+            }, 3000);
         }
     }
 }
