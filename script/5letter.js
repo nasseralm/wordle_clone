@@ -68,10 +68,10 @@ function checkGuess () {
         return
     }
 
-    // if (!WORDS.includes(guessString)) {
-    //     toastr.error("Palavra não existe na lista!")
-    //     return
-    // }
+    if (!WORDS.includes(guessString)) {
+        toastr.error("Palavra não existe na lista!")
+        return
+    }
 
     
     for (let i = 0; i < wordLen; i++) {
