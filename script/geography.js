@@ -5,7 +5,7 @@ let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
 let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
-let wordLen= rightGuessString.length;
+let wordLen = rightGuessString.length;
 
 console.log(rightGuessString)
 console.log(WORDS);
@@ -17,7 +17,7 @@ function initBoard() {
     for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
         let row = document.createElement("div")
         row.className = "letter-row"
-        
+
         for (let j = 0; j < wordLen; j++) {
             let box = document.createElement("div")
             box.className = "letter-box"
@@ -34,7 +34,7 @@ function shadeKeyBoard(letter, color) {
             let oldColor = elem.style.backgroundColor
             if (oldColor === '#76c893') {
                 return
-            } 
+            }
 
             if (oldColor === '#ffcb77' && color !== '#76c893') {
                 return
@@ -46,7 +46,7 @@ function shadeKeyBoard(letter, color) {
     }
 }
 
-function deleteLetter () {
+function deleteLetter() {
     let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
     let box = row.children[nextLetter - 1]
     box.textContent = ""
@@ -55,7 +55,7 @@ function deleteLetter () {
     nextLetter -= 1
 }
 
-function checkGuess () {
+function checkGuess() {
     let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
     let guessString = ''
     let rightGuess = Array.from(rightGuessString)
@@ -74,12 +74,12 @@ function checkGuess () {
     //     return
     // }
 
-    
+
     for (let i = 0; i < wordLen; i++) {
         let letterColor = ''
         let box = row.children[i]
         let letter = currentGuess[i]
-        
+
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         // is letter in the correct guess
         if (letterPosition === -1) {
@@ -100,7 +100,7 @@ function checkGuess () {
         }
 
         let delay = 250 * i
-        setTimeout(()=> {
+        setTimeout(() => {
             //flip box
             animateCSS(box, 'flipInX')
             //shade box
@@ -133,7 +133,7 @@ function checkGuess () {
     }
 }
 
-function insertLetter (pressedKey) {
+function insertLetter(pressedKey) {
     if (nextLetter === wordLen) {
         return
     }
@@ -149,24 +149,24 @@ function insertLetter (pressedKey) {
 }
 
 const animateCSS = (element, animation, prefix = 'animate__') =>
-  // We create a Promise and return it
-  new Promise((resolve, reject) => {
-    const animationName = `${prefix}${animation}`;
-    // const node = document.querySelector(element);
-    const node = element
-    node.style.setProperty('--animate-duration', '0.3s');
-    
-    node.classList.add(`${prefix}animated`, animationName);
+    // We create a Promise and return it
+    new Promise((resolve, reject) => {
+        const animationName = `${prefix}${animation}`;
+        // const node = document.querySelector(element);
+        const node = element
+        node.style.setProperty('--animate-duration', '0.3s');
 
-    // When the animation ends, we clean the classes and resolve the Promise
-    function handleAnimationEnd(event) {
-      event.stopPropagation();
-      node.classList.remove(`${prefix}animated`, animationName);
-      resolve('Animation ended');
-    }
+        node.classList.add(`${prefix}animated`, animationName);
 
-    node.addEventListener('animationend', handleAnimationEnd, {once: true});
-});
+        // When the animation ends, we clean the classes and resolve the Promise
+        function handleAnimationEnd(event) {
+            event.stopPropagation();
+            node.classList.remove(`${prefix}animated`, animationName);
+            resolve('Animation ended');
+        }
+
+        node.addEventListener('animationend', handleAnimationEnd, { once: true });
+    });
 
 document.addEventListener("keyup", (e) => {
 
@@ -195,7 +195,7 @@ document.addEventListener("keyup", (e) => {
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     const target = e.target
-    
+
     if (!target.classList.contains("keyboard-button")) {
         return
     }
@@ -203,9 +203,9 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
     if (key === "Del") {
         key = "Backspace"
-    } 
+    }
 
-    document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
+    document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
 })
 
 initBoard();
